@@ -1,0 +1,156 @@
+WHILE EXECUTING TITV 
+
+./gradlew f_o_i; \
+./gradlew f_make; 
+./gradlew fwk_optimases_generate -PACTION=GenAllConf;
+./gradlew fwk_optimases_generate -PACTION=GenAllOsPlugin;
+./gradlew fwk_optimases_generate -PACTION=GenAllEnv;
+./external/toolchain-TITV/launchRide.bash --target PT01V00 --basenametool applis_common
+
+
+./gradlew fwk_init / f_i
+./gradlew fwk_optimases_initialize / f_o_i
+./gradlew fwk_optimases_initialize --refresh-dependencies
+
+Design
+
+./gradlew f_o_i; \
+
+./gradlew fwk_si_config_init; \
+./gradlew fwk_configure_dependencies;  \
+./build/toolchain/optimases/PT01V00/optimases_init.bash -v 2 --localRun
+
+./build/toolchain/optimases/PT01V00/optimases_gen.bash codda_gen_code -v 2; \
+./build/toolchain/optimases/PT01V00/optimases_gen.bash codda_merge_code -v 2; \
+./build/toolchain/optimases/PT01V00/optimases_gen.bash codda_import_code -v 2; 
+
+./gradlew fwk_optimases_generate -PACTION=codda_gen_code; \
+./gradlew fwk_optimases_generate -PACTION=codda_merge_code; \
+./gradlew fwk_optimases_generate -PACTION=codda_import_code; \
+./gradlew fwk_optimases_generate -PACTION=codda_run_check; 
+
+./gradlew fwk_optimases_generate -PACTION=codda_import_code;
+./gradlew fwk_optimases_generate -PACTION=codda_run_check_prelim
+./gradlew fwk_optimases_generate -PACTION=check_design_E4CS_Se_CreateClientHmiServerChannels
+./gradlew fwk_optimases_generate -PACTION=all_check_design
+./gradlew fwk_optimases_generate -PACTION=codda_run_check
+./gradlew fwk_optimases_generate -PACTION=codda_gen_html_enhanced
+
+Code/build
+
+./gradlew fwk_optimases_generate -PACTION=check_modif_user
+./gradlew fwk_optimases_generate -PACTION=all_check_flow;
+./gradlew fwk_optimases_generate -PACTION=check_code_E4CS_ClientInterface
+./gradlew fwk_optimases_generate -PACTION=all_check_code
+./gradlew f_make // we have to execute f_make before all_check_build
+./gradlew fwk_optimases_generate -PACTION=all_check_build
+
+Unit Proof
+
+./gradlew fwk_optimases_generate -PACTION=verif_proof_<<functionName>>
+./gradlew fwk_optimases_generate -PACTION=verif_all_proof
+
+Integration Test
+
+./gradlew fwk_make
+./gradlew fwk_optimases_generate -PACTION=GenAllConf
+./gradlew fwk_optimases_generate -PACTION=TestAppli.elf
+./gradlew fwk_optimases_generate --action=verif_titv_<<Script name or case number>>
+
+
+
+--opt="F"
+
+./gradlew fwk_optimases_generate -PACTION=all_check_flow;
+
+DCSL check
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_E4DS_Se_ReceiveDataFromHMIServer; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_E4DS_Se_ReceiveDataFromHMIServer; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_E4DS_Se_ReceiveDataFromHMIServer; 
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_E4CS_Se_SendDomainDataRequest; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_E4CS_Se_SendDomainDataRequest; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_E4CS_Se_SendDomainDataRequest; 
+
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_E4CS_Se_CreateClientExtensionChannel; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_E4CS_Se_CreateClientExtensionChannel; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_E4CS_Se_CreateClientExtensionChannel; 
+
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_DHRE_Se_SendRequest
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_E4CS_Se_ReadDomainDataReply; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_E4CS_Se_ReadDomainDataReply; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_E4CS_Se_ReadDomainDataReply; 
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_E4DS_Se_CreateDcmExtensionChannelList; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_E4DS_Se_CreateDcmExtensionChannelList; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_E4DS_Se_CreateDcmExtensionChannelList; 
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_E4CS_Se_PublishDomainData; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_E4CS_Se_PublishDomainData; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_E4CS_Se_PublishDomainData; 
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_E4CS_Se_SendDomainDataRequest; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_E4CS_Se_SendDomainDataRequest; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_E4CS_Se_SendDomainDataRequest; 
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_E4DS_Se_PublishDcmState; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_E4DS_Se_PublishDcmState; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_E4CS_Se_PublishDomainData; 
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_E4CS_Se_PublishDomainData; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_E4CS_Se_PublishDomainData; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_E4CS_Se_PublishDomainData; 
+
+
+
+./gradlew fwk_optimases_generate -PACTION=codda_gen_code; \
+./gradlew fwk_optimases_generate -PACTION=codda_merge_code; \
+./gradlew fwk_optimases_generate -PACTION=codda_import_code; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_DHRE_Se_ReadRequest; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_DHRE_Se_ReadRequest; 
+./gradlew fwk_optimases_generate -PACTION=verif_proof_DHPS_Se_SubscribeTopic; 
+
+
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_DHRE_Se_ReadRequest
+
+
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_DHBC_Se_CreateSamplingChannel
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_DHEI_Se_ReadEvent
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_DHRE_Se_ReadReply
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_DHRE_Se_ReadRequest
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_DHPS_Se_PublishTopic
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_DHPS_Se_CreatePubSubChannelList
+
+
+
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_DHPS_Se_PublishTopic; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_DHPS_Se_PublishTopic; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_DHPS_Se_PublishTopic; 
+
+
+
+./gradlew f_o_i; \
+./gradlew fwk_optimases_generate -PACTION=check_design_DHRE_Se_ReadRequest; \
+./gradlew fwk_optimases_generate -PACTION=check_flow_DHEI_Se_CreateEventChannelList; \
+./gradlew fwk_optimases_generate -PACTION=verif_proof_DHEI_Se_CreateEventChannelList; 
+
+
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_E4DS_Se_SendDcmEvent
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_E4DS_Se_ReceiveDataFromHMIServer
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_E4CS_Se_SendDomainDataRequest
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_E4DS_Se_CreateDcmExtensionChannelList
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_E4CS_Se_PublishDomainData
+./build/toolchain/optimases/PT01V00/optimases_gen.bash verif_proof_E4CS_Se_CreateClientExtensionChannel
